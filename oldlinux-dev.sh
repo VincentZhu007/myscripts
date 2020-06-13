@@ -6,15 +6,18 @@
 
 APP='vim build-essential bin86 git'
 
-# TODO: Check Distribution is Ubuntu
+# Check Distribution is Ubuntu
+OS=`cat /etc/os-release | grep '^ID=' | cut -d\" -f2`
+[ $OS != 'ubuntu' ] && echo -e \
+"\e[0;31mError: This script can only run on ubuntu!\e[0m" && exit 1
 
+# Do detail staff.
 sudo apt-get update
 
 for x in ${APP} ;
 do
 	sudo apt-get install -y $x
 done
-
 
 
 # Install gcc-3.4
